@@ -59,3 +59,8 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+def inicio_juego(request):
+    context = {}
+    return render(request, 'inicio_juego.html',context)
