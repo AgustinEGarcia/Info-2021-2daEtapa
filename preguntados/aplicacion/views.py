@@ -1,4 +1,16 @@
-from django.shortcuts import render
+#librerias de python
+from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib import messages
+from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator
+
+#librerias mias
+from .forms import *
+from .models import *
+from .admin import *
 
 def home(request):
     context={}
