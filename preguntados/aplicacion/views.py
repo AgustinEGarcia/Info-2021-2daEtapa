@@ -64,3 +64,16 @@ def logoutUser(request):
 def inicio_juego(request):
     context = {}
     return render(request, 'inicio_juego.html',context)
+
+
+def Usuario(request):
+    Usuarios = User.objects.all()
+    usuarios_totales = User.objects.count()
+    admin= Usuarios.filter(is_superuser=True).count()
+    participante= Usuarios.filter(is_superuser=False).count()
+    paginator = Paginator(Usuarios,4)
+    page= request.GET.get('page')
+    Usuarios = paginator.get_page(page)
+    context ={'participantes':Usuarios, 'usuarios_totales':usuarios_totales, 'admin':admin, 'participante':participante}
+
+    return render(request,'usuarios.html',context)
