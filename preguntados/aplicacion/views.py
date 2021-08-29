@@ -7,10 +7,13 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
+
 #librerias mias
 from .forms import *
 from .models import *
 from .admin import *
+from .decorador import allowed_user 
+
 
 def home(request):
     context={}
@@ -146,6 +149,8 @@ def tablero(request):
     }
 
     return render(request,'tablero.html', context)
+
+@allowed_user(allowed_roles=['participante'])
 
 def jugar(request):
 	usuario = request.user.participante
