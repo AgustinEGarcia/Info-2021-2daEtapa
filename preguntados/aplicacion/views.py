@@ -135,10 +135,10 @@ def deleteUser(request, pk):
 
 
 def tablero(request):
-    total_usuarios = participante.objects.order_by('-puntaje_total')[:10]
+    total_usuarios = participante.objects.order_by('-puntaje_total')
     contador = total_usuarios.count()
 
-    paginator = Paginator(total_usuarios,10)
+    paginator = Paginator(total_usuarios,3)
     page= request.GET.get('page')
     total_usuarios = paginator.get_page(page)
 
@@ -177,6 +177,23 @@ def jugar(request):
 		}
 
 	return render(request, 'jugar.html', context)
+
+
+@login_required(login_url='login')
+def volver_jugar(request):
+    userid = request.user.participante.id
+    preguntas_nuevas = PreguntasRespondidas.objects.filter(participante_id=userid)
+
+    context ={'item': preguntas_nuevas,}
+    if request.method == 'POST':
+        preguntas_nuevas.delete()
+
+        return redirect('inicio_juego')
+
+    return render(request,'volver_jugar.html',context)
+
+
+
 
 
 

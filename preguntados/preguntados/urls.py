@@ -35,4 +35,5 @@ urlpatterns = [
     path('inicio_juego/', views.inicio_juego, name='inicio_juego'),
     path('crear_preguntas/', views.crear_pregunta, name='crear_preguntas'),
     path('crear_respuesta/',views.crear_respuesta, name='crear_respuesta'),
+    path('volver_jugar/', views.volver_jugar, name='volver_jugar'),
 ]
